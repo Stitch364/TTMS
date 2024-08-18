@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影院展示信息页面</title>
+    <link rel="stylesheet" href="/views/static/css/cinema.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <link rel="stylesheet" href="/views/static/css/cinema2.css">
+    <script src="/views/static/script/jquery-1.7.2.js"></script>
+    <style>
+        #submit0{
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        $(function (){
+            //给删除影院的排片超链接绑定单击事件
+            $("#deletePalyback").click(function (){
+                //弹窗选择是否删除
+                return confirm("确定要删除这个放映信息吗？")
+            })
+        })
+    </script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/ManageGetMovieByLimit">电影管理</a></li>
+                <li><a href="/ManageGetCinemaByLimit">影院管理</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+
+    <section class="cinema-info">
+        <br><br>
+            <form>
+               日期：<input placeholder="放映日期">&nbsp;&nbsp;&nbsp;&nbsp;
+                放映时间：<input placeholder="格式（13：00）">&nbsp;&nbsp;&nbsp;&nbsp;
+                放映厅：<input placeholder="放映厅">&nbsp;&nbsp;&nbsp;&nbsp;
+                票价：<input placeholder="票价">&nbsp;&nbsp;&nbsp;&nbsp;
+               票数：<input placeholder="票数">&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="AddPlayback" type="submit" value="添加"></a>
+            </form>
+        <form>
+        <table>
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>放映开始时间</th>
+                <th>放映厅</th>
+                <th>票价</th>
+                <th>票数</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+                {{range .SameDateAndMovie}}
+                <tr>
+                    <td><input value="{{.Date}}" name="Data.{{.Id}}"></td>
+                    <td><input value="{{.Time}}"></td>
+                    <td><input value="{{.Hall}}"></td>
+                    <td><input value="{{.Price}}"></td>
+                    <td><input value="{{.Number}}"></td>
+                    <td><a href="/DeletePlayback?playbackId={{.Id}}" class="delete-ticket" id="deletePlayback">删除</a></td>
+                </tr>
+                {{end}}
+                <!-- 可以在这里添加更多的行 -->
+            </tbody>
+
+        </table>
+    </form>
+    <br><br><br>
+        <a href="#" class="add-ticket">保存更改</a>
+    </section>
+</main>
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

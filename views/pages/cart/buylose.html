@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>买票失败</title>
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <style>
+        p{
+            text-align: center;
+        }
+        #time{
+            color: #ff2929;/*红色*/
+        }
+
+    </style>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/GetMovieByLimit">电影</a></li>
+                <li><a href="/GetCinemaByLimit">影院</a></li>
+
+                <li>
+                    <div class="dropdown">
+                        <span>我的</span>
+                        <div class="dropdown-content">
+                            <a href="/GetGoods">我的订单</a>
+                            <a href="#">注销</a>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="container">
+
+</div>
+<script>
+    alert("您选择的票已售完！")
+    window.location.href ="/GetTicket?playbackId={{ . }}"
+</script>
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

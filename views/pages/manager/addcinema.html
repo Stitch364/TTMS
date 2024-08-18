@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影院展示信息页面</title>
+    <link rel="stylesheet" href="/views/static/css/cinema.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <link rel="stylesheet" href="/views/static/css/cinema2.css">
+    <script src="/views/static/script/jquery-1.7.2.js"></script>
+    <style>
+        #submit0{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/ManageGetMovieByLimit">电影管理</a></li>
+                <li><a href="/ManageGetCinemaByLimit">影院管理</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+
+    <section class="cinema-info">
+
+        <form action="/AddCinema">
+            <h2>影院信息</h2>
+            <div class="cinema-details">
+                <input type="text" value="views/static/img/c1.png" name="imgpath">
+                <div class="cinema-text">
+                    <!--                    <h3>{{.Brand}}({{.Name}})</h3>-->
+                    <input class="Brand" placeholder="电影名" name="Brand" type="text"/>
+                    (<input class="Name" placeholder="别名" name="Name" type="text"/>)<br><br><br>
+                    地址： <input class="Address" placeholder="具体地址" name="Address" type="text"/><br><br>
+                    电话:  <input class="PhoneNumber" placeholder="联系电话" name="PhoneNumber" type="text"/><br><br>
+                    服务:  <input class="Serve" placeholder="提供的服务" name="Serve" type="text"/><br><br>
+                    <input class="Types" placeholder="影厅类型" name="Types" type="text"/><br>
+                    <input class="Area" placeholder="所在区域" name="Area" type="text"/>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-submit" id="submit0" value="提交更改">
+        </form>
+    </section>
+
+</main>
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+<script>
+    //规定时间格式的正则表达式
+    const regex = /^\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{2}$/
+
+    $(function(){
+        //给提交按钮绑定单击事件
+        $("#submit0").click(function(){
+            //
+            /*
+                val()：用来获取或设置input中的value属性值
+                对象.val()：获取value属性值
+                对象.val("new Value")：设置value属性值
+            */
+            var username = $("#username").val();
+            //判断用户名是否为空
+            if(username === ""){
+                alert("用户名不能为空！");
+                //取消默认行为
+                return false;
+            }
+            //获取用户输入的密码
+            var password = $("#password").val();
+            if(password === ""){
+                alert("密码不能为空！");
+                return false;
+            }
+        });
+        //切换span标签内容
+        if("{{.}}"==="用户名或密码不正确！"){
+            //设置span标签中的文本值
+            $("#msg").text("用户名或密码不正确！");
+        }
+
+    });
+
+
+    // /^\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{2}$/
+
+</script>
+</html>

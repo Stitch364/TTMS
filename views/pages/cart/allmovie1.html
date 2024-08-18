@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影筛选页面</title>
+    <link rel="stylesheet" href="/views/static/css/allmovie.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <script src="/views/static/script/jquery-1.7.2.js"></script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/GetMovieByLimit">电影</a></li>
+                <li><a href="/GetCinemaByLimit">影院</a></li>
+                {{if .IsLogin}}
+                <li>
+                    <div class="dropdown">
+                        <span>我的</span>
+                        <div class="dropdown-content">
+                            <a href="/GetGoods">我的订单</a>
+                            <a href="/logout">注销</a>
+                        </div>
+                    </div>
+                </li>
+                {{else}}
+                <li><a href="/views/pages/user/login.html">登录</a></li>
+                {{end}}
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <section class="filters">
+        <h2>电影筛选</h2>
+        <form action="/GetMovieByLimit" method="get">
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="status">热映/即将上映:</label>
+                    <select id="status" name="status">
+                        <option value="now">热映电影</option>
+                        <option value="upcoming">即将上映电影</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="genre">电影类型:</label>
+                    <select id="genre" name="genre">
+                        <option value="">全部</option>
+                        <option value="爱情">爱情</option>
+                        <option value="喜剧">喜剧</option>
+                        <option value="动画">动画</option>
+                        <option value="恐怖">恐怖</option>
+                        <option value="科幻">科幻</option>
+                        <option value="剧情">剧情</option>
+                        <option value="惊悚">惊悚</option>
+                        <option value="动作">动作</option>
+                        <option value="悬疑">悬疑</option>
+                        <option value="犯罪">犯罪</option>
+                        <option value="冒险">冒险</option>
+                        <option value="战争">战争</option>
+                        <option value="奇幻">奇幻</option>
+                        <option value="运动">运动</option>
+                        <option value="家庭">家庭</option>
+                        <option value="古装">古装</option>
+                        <option value="武侠">武侠</option>
+                        <option value="历史">历史</option>
+                        <option value="传记">传记</option>
+                        <option value="青春">青春</option>
+                        <option value="短片">短片</option>
+                        <option value="纪录片">纪录片</option>
+                        <option value="戏曲">戏曲</option>
+                        <option value="音乐">音乐</option>
+                        <option value="灾难">灾难</option>
+                        <option value="儿童">儿童</option>
+                        <option value="黑色电影">黑色电影</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="region">电影区域:</label>
+                    <select id="region" name="region">
+                        <option value="">全部</option>
+                        <option value="中国">中国</option>
+                        <option value="美国">美国</option>
+                        <option value="韩国">韩国</option>
+                        <option value="日本">日本</option>
+                        <option value="欧洲">欧洲</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="year">上映年代:</label>
+                    <select id="year" name="year">
+                        <option value="">全部</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <input type="submit" value="筛选" class="custom-submit">
+                </div>
+
+            </div>
+        </form>
+    </section>
+<!--    展示符合条件的电影信息-->
+    <section class="movie-list">
+        {{range .AllMovies}}
+        <div class="movie-item">
+            <img src="{{.ImgPath}}" alt="{{.Id}}" onclick="delTr(this)">
+            <h2>{{.Name}}</h2>
+            <p>{{.Type}}</p>
+        </div>
+        {{end}}
+        <!-- 更多电影项 -->
+    </section>
+
+    <div id="page_nav">
+        {{if .IsHasPrev}}
+        <a href="/GetMovieByLimit" id="" onclick="page(this)">首页</a>
+        <a href="/GetMovieByLimit?" id="{{.GetPrevPageNo}}" onclick="page(this)">上一页</a>
+        {{end}}
+        当前是第{{.PageNumber}}页，共{{.TotalPages}}页，共{{.TotalRecord}}条记录
+        {{if .IsHasNext}}
+        <a href="/GetMovieByLimit?" id="{{.GetNextPageNo}}" onclick="page(this)">下一页</a>
+        <a href="/GetMovieByLimit?" id="{{.TotalPages}}" onclick="page(this)">末页</a>
+        {{end}}
+        <script>
+
+            function page(a){
+                var url = new URL(window.location.href);
+
+                // 使用 URLSearchParams 获取查询字符串
+                var params = new URLSearchParams(url.search);
+
+                //获取到movieid的值
+                var status = params.get("status")
+                var genre = params.get("genre")
+                var region = params.get("region")
+                var year = params.get("year")
+
+                //alert(movieid2);
+                //获取到标签内的链接
+                var url2 = new URL(a.href);
+                //添加
+                if (status !=null){
+                    url2.searchParams.set('status', status);
+                }
+                if (genre !=null){
+                    url2.searchParams.set('genre', genre);
+                }
+                if (region !=null){
+                    url2.searchParams.set('region', region);
+                }
+                if (year !=null){
+                    url2.searchParams.set('year', year);
+                }
+                if (a.id !=null){
+                    url2.searchParams.set('pageNumber', a.id);
+                }
+                // 更新<a>标签的href属性
+                a.href = url2.toString();
+                // alert(a.id)
+                // alert(a.href)
+                // alert(url2)
+                // 触发点击事件，重定向到新的链接
+                window.location.href = a.href;
+                return false
+            }
+        </script>
+    </div>
+</main>
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+<script>
+    //绑定事件
+    function delTr(obj){
+        window.location.href ='/information?movie_Id='+obj.alt;
+    }
+</script>
+</body>
+</html>

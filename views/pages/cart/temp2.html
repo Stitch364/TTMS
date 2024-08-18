@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购票页面</title>
+    <link rel="stylesheet" href="/views/static/css/cinema.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <link rel="stylesheet" href="/views/static/css/temp.css">
+    <script src="/views/static/script/jquery-1.7.2.js"></script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/ManageGetMovieByLimit">电影管理</a></li>
+                <li><a href="/ManageGetCinemaByLimit">影院管理</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <section class="cinema-info">
+        <h1>电影票购买</h1>
+        <div class="cinema">
+            <h2>选择座位</h2>
+            <div class="screen">屏幕</div>
+            <div class="seating-chart">
+<!--                遍历座位-->
+                {{range .Seat}}
+
+                <div class="row">
+                    <div class="seat available" data-seat="A1" onclick="choose(this)">A1</div>
+                    <div class="seat available" data-seat="A2" onclick="choose(this)">A2</div>
+                    <div class="seat available" data-seat="A3" onclick="choose(this)">A3</div>
+                    <div class="seat available" data-seat="A4" onclick="choose(this)">A4</div>
+                    <div class="seat available" data-seat="A5" onclick="choose(this)">A5</div>
+                    <div class="seat available" data-seat="A6" onclick="choose(this)">A6</div>
+                    <div class="seat available" data-seat="A7" onclick="choose(this)">A7</div>
+                    <div class="seat available" data-seat="A8" onclick="choose(this)">A8</div>
+                    <div class="seat available" data-seat="A9" onclick="choose(this)">A9</div>
+                    <div class="seat available" data-seat="A10" onclick="choose(this)">A10</div>
+                </div>
+                <div class="row">
+                    <div class="seat available" data-seat="B1" onclick="choose(this)">B1</div>
+                    <div class="seat available" data-seat="B2" onclick="choose(this)">B2</div>
+                    <div class="seat available" data-seat="B3" onclick="choose(this)">B3</div>
+                    <div class="seat available" data-seat="B4" onclick="choose(this)">B4</div>
+                    <div class="seat available" data-seat="B5" onclick="choose(this)">B5</div>
+                    <div class="seat available" data-seat="B6" onclick="choose(this)">B6</div>
+                    <div class="seat available" data-seat="B7" onclick="choose(this)">B7</div>
+                    <div class="seat available" data-seat="B8" onclick="choose(this)">B8</div>
+                    <div class="seat available" data-seat="B9" onclick="choose(this)">B9</div>
+                    <div class="seat available" data-seat="B10" onclick="choose(this)">B10</div>
+                </div>
+                <div class="row">
+                    <div class="seat available" data-seat="C1" onclick="choose(this)">C1</div>
+                    <div class="seat available" data-seat="C2" onclick="choose(this)">C2</div>
+                    <div class="seat available" data-seat="C3" onclick="choose(this)">C3</div>
+                    <div class="seat available" data-seat="C4" onclick="choose(this)">C4</div>
+                    <div class="seat available" data-seat="C5" onclick="choose(this)">C5</div>
+                    <div class="seat available" data-seat="C6" onclick="choose(this)">C6</div>
+                    <div class="seat available" data-seat="C7" onclick="choose(this)">C7</div>
+                    <div class="seat available" data-seat="C8" onclick="choose(this)">C8</div>
+                    <div class="seat available" data-seat="C9" onclick="choose(this)">C9</div>
+                    <div class="seat available" data-seat="C10" onclick="choose(this)">C10</div>
+                </div>
+                <div class="row">
+                    <div class="seat available" data-seat="D1" onclick="choose(this)">D1</div>
+                    <div class="seat available" data-seat="D2" onclick="choose(this)">D2</div>
+                    <div class="seat available" data-seat="D3" onclick="choose(this)">D3</div>
+                    <div class="seat available" data-seat="D4" onclick="choose(this)">D4</div>
+                    <div class="seat available" data-seat="D5" onclick="choose(this)">D5</div>
+                    <div class="seat available" data-seat="D6" onclick="choose(this)">D6</div>
+                    <div class="seat available" data-seat="D7" onclick="choose(this)">D7</div>
+                    <div class="seat available" data-seat="D8" onclick="choose(this)">D8</div>
+                    <div class="seat available" data-seat="D9" onclick="choose(this)">D9</div>
+                    <div class="seat available" data-seat="D10" onclick="choose(this)">D10</div>
+                </div>
+                <div class="row">
+                    <div class="seat available" data-seat="E1" onclick="choose(this)">E1</div>
+                    <div class="seat available" data-seat="E2" onclick="choose(this)">E2</div>
+                    <div class="seat available" data-seat="E3" onclick="choose(this)">E3</div>
+                    <div class="seat available" data-seat="E4" onclick="choose(this)">E4</div>
+                    <div class="seat available" data-seat="E5" onclick="choose(this)">E5</div>
+                    <div class="seat available" data-seat="E6" onclick="choose(this)">E6</div>
+                    <div class="seat available" data-seat="E7" onclick="choose(this)">E7</div>
+                    <div class="seat available" data-seat="E8" onclick="choose(this)">E8</div>
+                    <div class="seat available" data-seat="E9" onclick="choose(this)">E9</div>
+                    <div class="seat available" data-seat="E10" onclick="choose(this)">E10</div>
+                </div>
+                <div class="row">
+                    <div class="seat available" data-seat="F1" onclick="choose(this)">F1</div>
+                    <div class="seat available" data-seat="F2" onclick="choose(this)">F2</div>
+                    <div class="seat available" data-seat="F3" onclick="choose(this)">F3</div>
+                    <div class="seat available" data-seat="F4" onclick="choose(this)">F4</div>
+                    <div class="seat available" data-seat="F5" onclick="choose(this)">F5</div>
+                    <div class="seat available" data-seat="F6" onclick="choose(this)">F6</div>
+                    <div class="seat available" data-seat="F7" onclick="choose(this)">F7</div>
+                    <div class="seat available" data-seat="F8" onclick="choose(this)">F8</div>
+                    <div class="seat available" data-seat="F9" onclick="choose(this)">F9</div>
+                    <div class="seat available" data-seat="F10" onclick="choose(this)">F10</div>
+                </div>
+                {{end}}
+                <div class="summary">
+                    <button id="purchase-button" onclick="buy()">购买</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // "seat available"  可选
+    //"seat ban"  不可选
+    //"seat selected"  已选
+    var num = 0
+    var arr = []
+
+    function choose(a){
+        // 获取class属性，并判断
+        var Class = a.getAttribute('class');
+        //获取座位编号
+        var data = a.getAttribute('data-seat');
+        // alert(data)
+        // alert(Class)
+        if (Class === "seat available"){
+            a.setAttribute('class','seat selected')
+            arr.push(data)
+            num++
+        }
+        if (Class === "seat selected"){
+            a.setAttribute('class','seat available')
+            arr = arr.filter(function (item){
+                return item !== data
+            })
+            num--
+        }
+    }
+
+
+    function buy(){
+        if (num>0){
+            confirm("确定要购买"+num+"张票吗？\n"+"座位为："+arr)
+        }else{
+            alert("您没有选择任何票！")
+        }
+        // 买票跳转前判断是否有票
+
+    }
+
+</script>
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+

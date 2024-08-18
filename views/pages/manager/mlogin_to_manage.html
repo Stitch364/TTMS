@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动跳转</title>
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <style>
+        p{
+            text-align: center;
+        }
+        #time{
+            color: #ff2929;/*红色*/
+        }
+
+    </style>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/ManageGetMovieByLimit">电影管理</a></li>
+                <li><a href="/ManageGetCinemaByLimit">影院管理</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <p>
+        <span style="font-size: 30px;color:rgba(253,102,0,0.78)">管理端登录成功！</span>
+    </p>
+    <p>
+        <span id="time">3</span>秒后，自动跳转到管理首页...
+    </p>
+</div>
+<script>
+    //定义倒计时变量
+    var t = 3
+    //获取time对象
+    var n = document.getElementById("time")
+    function time(){
+        t--
+        if(t===0){
+            //清除定时器
+            clearInterval(n1)
+            // //打开新的窗口
+            // open("https://www.zhongguose.com/")
+            //跳转到新地址
+            //默认进入管理电影的页面
+            location.href = "/ManageGetMovieByLimit"
+        }
+        //修改时间内容
+        n.innerHTML=t
+    }
+    //设置每一秒调用一次
+    var n1= setInterval(time,1000)
+</script>
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影院展示信息页面</title>
+    <link rel="stylesheet" href="/views/static/css/cinema.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <link rel="stylesheet" href="/views/static/css/cinema2.css">
+    <script src="/views/static/script/jquery-1.7.2.js"></script>
+    <style>
+        #submit0{
+         font-size: 20px;
+        }
+    </style>
+    <script>
+        $(function (){
+            //给删除影院的超链接绑定单击事件
+            $("#deleteMovie").click(function (){
+                //弹窗选择是否删除
+                return confirm("确定要删除这个影院你的信息吗？")
+            })
+        })
+    </script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/ManageGetMovieByLimit">电影管理</a></li>
+                <li><a href="/ManageGetCinemaByLimit">影院管理</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+    <main>
+
+        <section class="cinema-info">
+
+            <form action="/UpdateCinema">
+            {{range .Cinema1}}
+                <input value="{{.Id}}" name="Id" type="hidden">
+                <a href="DeleteCinema?cinema_id={{.Id}}" class="btn btn-score" id="deleteMovie">删除该影院信息</a>
+            <h2>影院信息</h2>
+            <div class="cinema-details">
+                <img src="{{.ImgPath}}" alt="{{.ImgPath}}" class="cinema-image">
+                <div class="cinema-text">
+<!--                    <h3>{{.Brand}}({{.Name}})</h3>-->
+                    <input class="" value="{{.Brand}}" name="Brand" type="text"/>
+                    (<input class="" value="{{.Name}}" name="Name" type="text"/>)<br><br><br>
+                    地址： <input class="" value="{{.Address}}" name="Address" type="text"/><br><br>
+                    电话:  <input class="" value="{{.PhoneNumber}}" name="PhoneNumber" type="text"/><br><br>
+                    服务:  <input class="" value="{{.Serve}}" name="Serve" type="text"/><br><br>
+                    <input class="" value="{{.Types}}" name="Types" type="text"/>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            {{end}}
+            <input type="submit" class="btn btn-submit" id="submit0" value="提交更改">
+        </form>
+        </section>
+
+    </main>
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

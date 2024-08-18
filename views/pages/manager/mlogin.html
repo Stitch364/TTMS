@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="/views/static/css/login.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <script type="text/javascript" src="/views/static/script/jquery-1.7.2.js"></script>
+    <script>
+        $(function (){
+            //切换span标签内容
+            if("{{.}}"==="用户名或密码不正确！"){
+                //设置span标签中的文本值
+                $("#msg").text("用户名或密码不正确！");
+            }
+        })
+    </script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/GetMovieByLimit">电影</a></li>
+                <li><a href="/GetCinemaByLimit">影院</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <header>
+        <img src="your-logo.png" alt="Logo" class="logo">
+    </header>
+    <form class="login-form" id="loginForm"  method="POST" action="/manageLogin">
+        <h2>管理员登录</h2>
+        <div class="form-group">
+            <label for="mname">用户名&emsp;&emsp;<span id="msg" style="color: rgba(255,41,41,0.93)"></span></label>
+            <input type="text" id="mname" name="mname" required pattern="[a-zA-Z0-9]{3,}" title="用户名必须是至少3个字符的字母和数字组合">
+        </div>
+        <div class="form-group">
+            <label for="mpassword">密码</label>
+            <input type="password" id="mpassword" name="mpassword" required pattern=".{6,}" title="密码长度至少为6个字符">
+        </div>
+        <button type="submit">登录</button>
+    </form>
+    <div class="register">
+        <button onclick="location.href='mregister.html'">注册管理员</button>
+    </div>
+</div>
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

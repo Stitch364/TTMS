@@ -1,0 +1,75 @@
+/* styles.css */
+
+/* 设置整个页面的基本样式 */
+body {
+    font-family: Arial, sans-serif; /* 设置字体 */
+    background-color: #f4f4f4; /* 设置背景颜色 */
+    margin: 0; /* 移除默认的页面边距 */
+    padding: 0; /* 移除默认的页面内边距 */
+}
+
+
+/* 设置页面标题的样式 */
+h1 {
+    text-align: center; /* 标题居中对齐 */
+    color: #333; /* 设置标题颜色 */
+}
+
+/* 设置订单列表的样式 */
+.order-list {
+    display: flex; /* 使用Flexbox布局 */
+    flex-direction: column; /* 垂直排列订单项 */
+    gap: 20px; /* 订单项之间的间距 */
+}
+
+/* 设置每个订单项的样式 */
+.order-item {
+    display: flex; /* 使用Flexbox布局 */
+    align-items: flex-start; /* 顶部对齐 */
+    background-color: #f9f9f9; /* 订单项背景颜色 */
+    padding: 15px; /* 内边距15px */
+    border-radius: 8px; /* 圆角半径8px */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    justify-content: space-between; /* 订单项内容左右分开 */
+}
+
+/* 设置电影海报的样式 */
+.poster {
+    width: 120px; /* 海报宽度120px */
+    height: 180px; /* 海报高度180px */
+    object-fit: cover; /* 适应海报内容而不失真 */
+    border-radius: 8px; /* 圆角半径8px */
+    margin-right: 20px; /* 右侧间距20px */
+}
+
+/* 设置订单详情的样式 */
+.order-details {
+    flex: 1; /* 占据剩余空间 */
+}
+
+.order-details h2 {
+    margin: 0; /* 移除标题的默认外边距 */
+    color: #333; /* 设置颜色 */
+}
+
+.order-details p {
+    margin: 5px 0; /* 上下间距5px */
+    color: #555; /* 设置文字颜色 */
+}
+
+/* 设置支付按钮的样式 */
+.pay-button {
+    padding: 10px 20px; /* 内边距10px 20px */
+    background-color: #007bff; /* 按钮背景颜色 */
+    color: #fff; /* 按钮文字颜色 */
+    border: none; /* 移除按钮边框 */
+    border-radius: 5px; /* 圆角半径5px */
+    font-size: 16px; /* 设置字体大小 */
+    cursor: pointer; /* 鼠标悬停时显示为指针 */
+    text-align: center; /* 文字居中对齐 */
+    margin-left: 20px; /* 左侧间距20px */
+}
+
+.pay-button:hover {
+    background-color: #0056b3; /* 悬停时的背景颜色 */
+}

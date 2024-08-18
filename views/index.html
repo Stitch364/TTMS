@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>TTMS</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+<!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/GetMovieByLimit">电影</a></li>
+                <li><a href="/GetCinemaByLimit">影院</a></li>
+                {{if .IsLogin}}
+                <li>
+                    <div class="dropdown">
+                        <span>我的</span>
+                        <div class="dropdown-content">
+                            <a href="/GetGoods">我的订单</a>
+                            <a href="/logout" class="logout" onclick="alert1(this)">注销</a>
+                        </div>
+                    </div>
+                </li>
+                {{else}}
+                <li><a href="pages/user/login.html">登录</a></li>
+                {{end}}
+
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- 主要内容区域 -->
+<main>
+    <section class="movie-listings">
+<!--        <h1>正在热映&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="#" class="all">全部></a></h1>-->
+        <div class="movie">
+            <h1 id="gro">今日票房&emsp;&emsp;&emsp;&emsp;<a href="/GetMovieByLimit?status=now" class="all">全部></a></h1>
+            <div class="movie-info">
+                {{range .MovieRank1}}
+            <div class="area"><a href="/information?movie_Id={{.Movieid}}"><div class="{{.Cls}}">{{.Id}}</div>{{.Name}}<div class="grossed">票房：{{.Grossed}}</div></a></div><br>
+                {{end}}
+            </div>
+        </div>
+        {{range .Movies}}
+        <div class="movie">
+            <img src="{{.ImgPath}}" alt="{{.Id}}"  onclick="delTr(this)">
+<!--            width="270" height="385"-->
+            <div class="movie-info">
+                <h2>{{.Name}}<span style="color: #ffb400;float:right;font-size: 35px">{{.Score}}</span></h2>
+                <p>类型：{{.Type}}</p>
+                <a href="/GetCinemaByLimit?movieId={{.Id}}" class="btn">购票</a>
+            </div>
+        </div>
+        {{end}}
+        <!-- 根据需要添加更多电影列表 -->
+    </section>
+    <br>
+    <section class="movie-listings">
+        <div class="movie">
+            <h1 id="ex">最受期待&emsp;<a href="/GetMovieByLimit?status=upcoming" class="all">查看完整榜单></a></h1>
+            <div class="movie-info">
+                {{range .MovieRank2}}
+                <div class="area"><a href="/information?movie_Id={{.Movieid}}"><div class="{{.Cls}}">{{.Id}}</div>{{.Name}}<div class="expect">{{.Expect}}人想看</div></a></div><br>
+                {{end}}
+            </div>
+        </div>
+
+        {{range .ExpectMovies}}
+        <div class="movie">
+            <img src="{{.ImgPath}}" alt="{{.Id}}" onclick="delTr(this)">
+            <div class="movie-info">
+                <h2>{{.Name}}<span style="color: #ffb400;float:right;font-size: 35px">{{.Score}}</span></h2>
+                <p>类型：{{.Type}}</p>
+                <a href="/GetCinemaByLimit?movieId={{.Id}}" class="btn">购票</a>
+            </div>
+        </div>
+        {{end}}
+    </section>
+
+</main>
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="/views/pages/manager/mlogin.html">管理员登录</a>
+            <a href="#"><img src="static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    //绑定事件
+    function delTr(obj){
+        //将地址改为id形式
+        // open('localhost:8080/information?movie_Id='+obj.alt）
+        // open('localhost:8080')
+         window.location.href ='/information?movie_Id='+obj.alt;
+    }
+    function alert1(logoout){
+        alert("账号已退出！")
+    }
+</script>
+</body>
+</html>

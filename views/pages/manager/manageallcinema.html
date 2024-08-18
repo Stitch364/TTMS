@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影院筛选页面</title>
+    <link rel="stylesheet" href="/views/static/css/allcinema.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <script src="/views/static/script/jquery-1.7.2.js"></script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/ManageGetMovieByLimit">电影管理</a></li>
+                <li><a href="/ManageGetCinemaByLimit">影院管理</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <section class="filters">
+        <h2>影院筛选</h2>
+        <form action="/ManageGetCinemaByLimit" method="get" id="myForm">
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="brand">影院品牌:</label>
+                    <select id="brand" name="brand">
+                        <option value="">全部</option>
+                        <option value="长安国际影城">长安国际影城</option>
+                        <option value="奥斯卡国际影城">奥斯卡国际影城</option>
+                        <option value="幸福蓝海国际影城">幸福蓝海国际影城</option>
+                        <option value="万达影城">万达影城</option>
+                        <option value="时代华纳国际影城">时代华纳国际影城</option>
+                        <option value="首映国际影城">首映国际影城</option>
+                        <option value="万象影城">万象影城</option>
+                        <option value="中都影城">中都影城</option>
+                        <option value="高景国际影城">高景国际影城</option>
+                        <option value="恒大嘉凯影城">恒大嘉凯影城</option>
+                        <option value="中影嘉莱国际影城">中影嘉莱国际影城</option>
+                        <option value="UME国际影城">UME国际影城</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="type">影院类型:</label>
+                    <select id="type" name="types">
+                        <option value="">全部</option>
+                        <option value="ALPD Pro高亮厅">ALPD Pro高亮厅</option>
+                        <option value="4DX厅">4DX厅</option>
+                        <option value="4K厅">4K厅</option>
+                        <option value="IMAX厅">IMAX厅</option>
+
+                        <option value="CGS中国巨幕厅">CGS中国巨幕厅</option>
+                        <option value="杜比全景声厅">杜比全景声厅</option>
+                        <option value="Dolby Cinema厅">Dolby Cinema厅</option>
+                        <option value="RealD厅">RealD厅</option>
+
+                        <option value="DTS:X 临境音厅">DTS:X 临境音厅</option>
+                        <option value="巨幕厅">巨幕厅</option>
+                        <option value="120帧/4K厅">120帧/4K厅</option>
+                        <option value="激光厅">激光厅</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="region">地区:</label>
+                    <select id="region" name="area">
+                        <option value="">全部</option>
+                        <option value="新城区">新城区</option>
+                        <option value="临潼区">临潼区</option>
+                        <option value="长安区">长安区</option>
+                        <option value="雁塔区">雁塔区</option>
+
+                        <option value="未央区">未央区</option>
+                        <option value="碑林区">碑林区</option>
+                        <option value="高新区">高新区</option>
+                        <option value="莲湖区">莲湖区</option>
+
+                        <option value="灞桥区">灞桥区</option>
+                        <option value="鄠邑区">鄠邑区</option>
+                        <option value="新城区">新城区</option>
+                        <option value="阎良区">阎良区</option>
+
+                        <option value="高陵区">高陵区</option>
+                        <option value="周至县">周至县</option>
+                        <option value="蓝田县">蓝田县</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="services">服务:</label>
+                    <select id="services" name="services">
+                        <option value="">全部</option>
+                        <option value="可退票">可退票</option>
+                        <option value="可改签">可改签</option>
+                        <option value="折扣">折扣</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <input type="button" value="筛选" class="custom-submit" onclick="fun1(this)">
+                </div>
+            </div>
+        </form>
+        <button class="buy-ticket" onclick="Addcinema(this)">增加影院信息</button>
+        <!--        <div class="filter-group">-->
+        <!--            <input type="button" value="获取" class="custom-submit" onclick="fun1(this)">-->
+        <!--        </div>-->
+    </section>
+
+
+    <section class="cinema-list">
+        <h2>筛选结果</h2>
+        {{range .Cinemas}}
+        <a href="/GoManageCinema?cinema_id={{.Id}} ">
+            <div class="cinema-item">
+                <div class="cinema-info">
+                    <h3>{{.Brand}}({{.Name}})</h3>
+                    <p>地址: {{.Address}}</p>
+                    <p>类型: {{.Types}}</p>
+                </div>
+
+<!--                <div class="cinema-actions">-->
+<!--                    <p>票价: <span class="ticket-price">¥100</span></p>-->
+<!--                    <button class="buy-ticket">购票</button>-->
+<!--                </div>-->
+            </div>
+        </a>
+        {{end}}
+
+        <!-- 更多影院项 -->
+    </section>
+    <div id="page_nav">
+        {{if .IsHasPrev}}
+        <a href="/ManageGetCinemaByLimit" id="" onclick="page(this)">首页</a>
+        <a href="/ManageGetCinemaByLimit?" id="{{.GetPrevPageNo}}" onclick="page(this)">上一页</a>
+        {{end}}
+        当前是第{{.PageNumber}}页，共{{.TotalPages}}页，共{{.TotalRecord}}条记录
+        {{if .IsHasNext}}
+        <a href="/ManageGetCinemaByLimit?" id="{{.GetNextPageNo}}" onclick="page(this)">下一页</a>
+        <a href="/ManageGetCinemaByLimit?" id="{{.TotalPages}}" onclick="page(this)">末页</a>
+        {{end}}
+        <script>
+
+            function page(a){
+                var url = new URL(window.location.href);
+
+                // 使用 URLSearchParams 获取查询字符串
+                var params = new URLSearchParams(url.search);
+
+                //获取到movieid的值
+                var brand = params.get("brand")
+                var types = params.get("types")
+                var area = params.get("area")
+                var services = params.get("services")
+
+                //alert(movieid2);
+                //获取到标签内的链接
+                var url2 = new URL(a.href);
+                //添加
+                if (brand !=null){
+                    url2.searchParams.set('brand', brand);
+                }
+                if (types !=null){
+                    url2.searchParams.set('types', types);
+                }
+                if (area !=null){
+                    url2.searchParams.set('area', area);
+                }
+                if (services !=null){
+                    url2.searchParams.set('services', services);
+                }
+                if (a.id !=null){
+                    url2.searchParams.set('pageNumber', a.id);
+                }
+                // 更新<a>标签的href属性
+                a.href = url2.toString();
+                // alert(a.id)
+                // alert(a.href)
+                // alert(url2)
+                // 触发点击事件，重定向到新的链接
+                window.location.href = a.href;
+                return false
+            }
+        </script>
+    </div>
+
+
+</main>
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+<script>
+    function fun1() {
+        //获取表单
+        var form = document.getElementById('myForm');
+        // 创建 URL 对象（当前地址）
+        var url = new URL(window.location.href);
+
+        // 更新表单的 action 属性
+        form.action = url.toString();
+
+        // alert(form.action)
+        // 提交表单
+        form.submit();
+    }
+
+    function Addcinema(){
+        window.location.href ='views/pages/manager/addcinema.html';
+    }
+
+
+    // function fun2(b) {
+    //     // // 阻止默认的点击行为
+    //     // event.preventDefault();
+    //     // 创建 URL 对象
+    //     var url = new URL(window.location.href);
+    //
+    //     // 使用 URLSearchParams 获取查询字符串
+    //     var params = new URLSearchParams(url.search);
+    //
+    //     //获取到movieid的值
+    //     var movieid2 = params.get('movieId')
+    //     //alert(movieid2);
+    //
+    //     //获取到标签内的链接
+    //     var url2 = new URL(b.href);
+    //     //添加
+    //     url2.searchParams.set('movieId', movieid2);
+    //     // 更新<a>标签的href属性
+    //     b.href = url2.toString();
+    //     //alert(url2)
+    //     // 触发点击事件，重定向到新的链接
+    //     window.location.href = b.href;
+    //     return false
+    // }
+
+</script>
+</body>
+</html>

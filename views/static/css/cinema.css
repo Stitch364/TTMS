@@ -1,0 +1,148 @@
+/* 基本样式 */
+body {
+    font-family: Arial, sans-serif; /* 设置字体 */
+    margin: 0; /* 去除默认的外边距 */
+    padding: 0; /* 去除默认的内边距 */
+    background-color: #f0f0f0; /* 设置背景颜色 */
+}
+
+
+/* 主内容区样式 */
+main {
+    padding: 20px; /* 内边距 */
+}
+
+/* 影院信息部分样式 */
+.cinema-info, .movies-info {
+    background-color: #fff; /* 背景色为白色 */
+    border-radius: 5px; /* 圆角 */
+    padding: 15px; /* 内边距 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    margin-bottom: 20px; /* 下边距 */
+}
+
+/* 影院详情部分的样式 */
+.cinema-details {
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+/* 影院图片样式 */
+.cinema-image {
+    width: 150px; /* 固定宽度 */
+    height: auto; /* 高度自动调整 */
+    border-radius: 5px; /* 圆角 */
+    margin-right: 15px; /* 右边距 */
+}
+
+/* 影院文本样式 */
+.cinema-text h3 {
+    font-size: 25px;/*设置字体大小*/
+    margin: 0; /* 去除默认的外边距 */
+}
+
+/* 日期选择器样式 */
+.date-selector {
+    margin-bottom: 20px; /* 下边距 */
+}
+
+/* 电影列表样式 */
+.movie-list {
+    display: flex; /* 使用 Flexbox 布局 */
+    flex-wrap: wrap; /* 允许换行 */
+    gap: 20px; /* 项目间距 */
+}
+
+/* 单个电影项的样式 */
+.movie-item {
+    background-color: #fff; /* 背景色为白色 */
+    border-radius: 5px; /* 圆角 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    overflow: hidden; /* 超出内容隐藏 */
+    width: 200px; /* 固定宽度 */
+    text-align: center; /* 文字居中 */
+
+}
+/*鼠标悬停效果*/
+.movie-item:hover {
+    cursor: pointer; /* 鼠标悬停时显示点击效果 */
+    background-color: #b9b9b9;
+}
+
+/* 电影项图片样式 */
+.movie-item img {
+    width: 100%; /* 图片宽度占满父容器 */
+    height: auto; /* 高度自动调整 */
+}
+
+/* 电影项标题样式 */
+.movie-item h3 {
+    font-size: 16px; /* 字体大小 */
+    margin: 10px 0; /* 上下边距 */
+}
+
+/*!* 隐藏元素的样式 *!*/
+/*.hidden {*/
+/*    display: none; !* 隐藏元素 *!*/
+/*}*/
+
+/* 电影详细信息部分样式 */
+#movie-details {
+    margin-top: 20px; /* 上边距 */
+}
+
+/* 电影详细信息布局样式 */
+.movie-info-details {
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+/* 电影详细海报样式 */
+#movie-poster-detail {
+    width: 150px; /* 固定宽度 */
+    height: auto; /* 高度自动调整 */
+    border-radius: 5px; /* 圆角 */
+    margin-right: 15px; /* 右边距 */
+}
+
+/* 电影详细信息文本样式 */
+.movie-info-text h3 {
+    margin: 0; /* 去除默认的外边距 */
+}
+
+/* 购票按钮样式 */
+#buy-tickets {
+    background-color: #28a745; /* 背景色为绿色 */
+    color: #fff; /* 文字颜色为白色 */
+    border: none; /* 去除边框 */
+    padding: 10px 15px; /* 内边距 */
+    border-radius: 5px; /* 圆角 */
+    cursor: pointer; /* 鼠标悬停时显示点击效果 */
+}
+
+/* 购票按钮悬停效果 */
+#buy-tickets:hover {
+    background-color: #218838; /* 悬停时背景色变深绿色 */
+}
+
+
+/* 样式用于并排排列按钮 */
+.button-container {
+    display: flex; /* 使用 flexbox 使按钮并排排列 */
+    gap: 10px; /* 按钮之间的间距 */
+}
+
+.button {
+    padding: 10px 20px; /* 按钮内边距 */
+    border: 1px solid #ccc; /* 按钮边框颜色 */
+    border-radius: 5px; /* 按钮圆角 */
+    background-color: #f0f0f0; /* 按钮默认背景色 */
+    color: #333; /* 按钮文字颜色 */
+    text-align: center; /* 文字居中 */
+    cursor: pointer; /* 鼠标悬停时显示手形光标 */
+    transition: background-color 0.3s ease; /* 背景色变化的过渡效果 */
+}
+
+.button:hover {
+    background-color: #d0d0d0; /* 鼠标悬停时背景色变灰 */
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影院展示信息页面</title>
+    <link rel="stylesheet" href="/views/static/css/cinema.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <link rel="stylesheet" href="/views/static/css/cinema2.css">
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/GetMovieByLimit">电影</a></li>
+                <li><a href="/GetCinemaByLimit">影院</a></li>
+                {{if .IsLogin}}
+                <li>
+                    <div class="dropdown">
+                        <span>我的</span>
+                        <div class="dropdown-content">
+                            <a href="/GetGoods">我的订单</a>
+                            <a href="/logout">注销</a>
+                        </div>
+                    </div>
+                </li>
+                {{else}}
+                <li><a href="/views/pages/user/login.html">登录</a></li>
+                {{end}}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="cinema-info">
+        {{range .Cinema1}}
+        <h2>影院信息</h2>
+        <div class="cinema-details">
+            <img src="{{.ImgPath}}" alt="{{.ImgPath}}" class="cinema-image">
+            <div class="cinema-text">
+                <h3>{{.Brand}}({{.Name}})</h3>
+                <p>地址: {{.Address}}</p>
+                <p>电话: {{.PhoneNumber}}</p>
+                <p>服务: {{.Serve}}</p>
+                <p>{{.Types}}</p>
+            </div>
+        </div>
+        {{end}}
+    </section>
+
+    <section class="movies-info">
+        <h2>放映电影</h2>
+
+        <div class="date-selector">
+<!--            <form action="/" id="myForm">-->
+<!--                <label for="date">日期:</label>-->
+<!--                <input type="date" id="date" name="date">-->
+<!--                <input type="button" onclick="updateaction(this)" value="确定">-->
+<!--            </form>-->
+            <div class="button-container">
+                {{range .AllDate}}
+                <input type="button" class="button" onclick="updateaction(this)" value="{{.Day}}">
+                {{end}}
+            </div>
+
+        </div>
+
+        <div class="movie-list">
+            {{range .MoveAndImgpath}}
+            <div class="movie-item">
+                <img src="{{.Imgpath}}" alt="{{.Id}}"  onclick="showMovieDetails(this)">
+                <h3>{{.Name}}</h3>
+            </div>
+            {{end}}
+
+<!--            <div class="movie-item">-->
+<!--                <img src="/views/static/img/img_4.png" alt="电影海报2" onclick="showMovieDetails(this)">-->
+<!--                <h3>你的名字。</h3>-->
+<!--            </div>-->
+            <!-- 更多电影项 -->
+        </div>
+    </section>
+    <section class="movies-info">
+        <section id="movie-details" class="hidden">
+<!--            <h2>电影标题</h2>-->
+            <table>
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>放映厅</th>
+                        <th>票价</th>
+                        <th>购票</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{range .SameDateAndMovie}}
+                <tr>
+                    <td>{{.Date}} &nbsp;{{.Time}}<div>{{.Duration}}散场</div></td>
+                    <td>{{.Hall}}</td>
+                    <td class="price">{{.Price}}</td>
+
+<!--                    $ 可以获取父级字段的内容-->
+                    <td><a href="/GetTicket?playbackId={{.Id}}" class="buy-ticket" onclick="log(this)" data-seat="{{$.IsLogin}}">选座购票</a></td>
+                </tr>
+                {{end}}
+                <!-- 可以在这里添加更多的行 -->
+                </tbody>
+            </table>
+        </section>
+    </section>
+</main>
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function showMovieDetails(movieId) {
+        // document.getElementById('movie-details').classList.remove('hidden');
+        window.location.href ='/cinema?'+movieId.alt;
+        // 创建 URL 对象
+        var url = new URL(window.location.href);
+        // 修改查询参数
+        url.searchParams.set('movieId', movieId.alt);
+        //打开新地址
+        window.location.href = url;
+    }
+
+    function updateaction(a){
+        //获取当前网址
+        //var currentURL = window.location.href;
+
+        // 创建 URL 对象
+        var url = new URL(window.location.href);
+
+        // 修改查询参数
+        url.searchParams.set('date', a.value);
+        // 使用 pushState 更新地址栏
+        //window.history.pushState({}, '', url);
+
+        // 如果你不希望添加历史记录条目，可以使用 replaceState
+        // window.history.replaceState({}, '', url);
+
+        //打开新地址
+        window.location.href = url;
+    }
+
+    function log(a){
+        var data = a.getAttribute('data-seat');
+        //alert(data)
+        if (data==="false"){
+            alert("请先登录！")
+            event.preventDefault();
+            return false
+        }else{
+            return true
+        }
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+/* 重置表格的默认样式 */
+table {
+    width: 100%; /* 表格宽度铺满整个网页 */
+    border-collapse: collapse; /* 合并表格边框 */
+}
+
+/* 表头样式 */
+th {
+    font-family: 'Arial Black', sans-serif; /* 使用黑体字 */
+    font-weight: bold; /* 粗体字 */
+    font-size: 1.8em; /* 增大字体大小 */
+    text-align: center; /* 表头文字居中对齐 */
+    padding: 10px; /* 单元格内边距 */
+}
+
+/* 表格单元格样式 */
+td {
+    padding: 10px; /* 单元格内边距 */
+    text-align: center; /* 单元格文字中对齐 */
+    font-size: 21px;
+}
+
+/* 去除表格边框 */
+table, th, td {
+    border: none;
+}
+
+/* 票价列的样式 */
+.price {
+    color: red; /* 票价文字颜色为红色 */
+}
+
+/* 购票链接样式 */
+a.add-ticket {
+    color: #ffffff; /* 链接文字颜色为蓝色 */
+    text-decoration: none; /* 去掉下划线 */
+    padding: 5px 10px; /* 按钮内边距 */
+    border-radius: 5px; /* 圆角边框 */
+    background-color: #007afd; /* 背景颜色 */
+}
+
+/* 购票链接的悬停效果 */
+a.add-ticket:hover {
+    background-color: #174aa9; /* 悬停时背景颜色变化 */
+}
+
+.AddPlayback{
+    font-size: 20px;
+    border:none;
+    color: #ffffff; /* 链接文字颜色为蓝色 */
+    text-decoration: none; /* 去掉下划线 */
+    padding: 5px 10px; /* 按钮内边距 */
+    border-radius: 5px; /* 圆角边框 */
+    background-color: #007afd; /* 背景颜色 */
+}
+
+.AddPlayback:hover{
+    background-color: #174aa9; /* 悬停时背景颜色变化 */
+}
+
+/* 购票链接样式 */
+a.delete-ticket {
+    color: #ffffff; /* 链接文字颜色为蓝色 */
+    text-decoration: none; /* 去掉下划线 */
+    padding: 5px 10px; /* 按钮内边距 */
+    border-radius: 5px; /* 圆角边框 */
+    background-color: #007afd; /* 背景颜色 */
+}
+
+/* 购票链接的悬停效果 */
+a.delete-ticket:hover {
+    background-color: #174aa9; /* 悬停时背景颜色变化 */
+}

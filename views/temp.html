@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>TTMS</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="#">电影</a></li>
+                <li><a href="#">影院</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+                {{if .IsLogin}}
+                <li><a href="#">我的</a></li>
+                {{else}}
+                <li><a href="pages/user/login.html">登录</a></li>
+                {{end}}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

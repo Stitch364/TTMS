@@ -1,0 +1,112 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.seat-chart {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 列 */
+    gap: 10px;
+    margin-bottom: 20px;
+    position: relative; /* 设置为 relative 以便后续绝对定位的元素 */
+}
+.seat {
+    width: 40px;
+    height: 40px;
+    background-color: #d3d3d3;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+.seat.available:hover {
+    background-color: #7cfc00; /* 鼠标悬停时颜色 */
+}
+.seat.selected {
+    background-color: #007bff;
+    color: white;
+}
+.seat.unavailable {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+}
+.legend {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.legend div {
+    display: flex;
+    align-items: center;
+}
+.legend div span {
+    margin-left: 5px;
+}
+.footer {
+    text-align: center;
+}
+.footer button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.footer button:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+}
+.total-info {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+/* 实线和虚线样式 */
+.line {
+    position: absolute;
+    width: calc(100% - 20px); /* 减去容器的内边距 */
+    height: 2px;
+    background-color: black;
+    left: 10px; /* 使其与容器对齐 */
+}
+.dashed-line {
+    position: absolute;
+    width: calc(40px * 10 + 90px); /* 宽度计算包括所有座位宽度和间距 */
+    height: 2px;
+    border-top: 2px dashed black;
+    left: calc(40px * 5 + 10px + 5px); /* 虚线的起始位置在5列和6列之间 */
+    top: 50%; /* 虚线在容器垂直中间 */
+    transform: translateY(-50%); /* 垂直居中 */
+}
+.screen-label {
+    position: absolute;
+    left: calc(40px * 5 + 20px); /* 虚线旁边的标签位置 */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    background: white;
+    padding: 0 5px;
+    border-radius: 4px;
+}

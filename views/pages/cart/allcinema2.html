@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影院筛选页面</title>
+    <link rel="stylesheet" href="/views/static/css/allcinema.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <link rel="stylesheet" href="/views/static/css/allcinema2.css">
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/views/pages/cart/allmovie1.html">电影</a></li>
+                <li><a href="/views/pages/cart/allcinema.html">影院</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+                {{if .IsLogin}}
+                <li>
+                    <div class="dropdown">
+                        <span>我的</span>
+                        <div class="dropdown-content">
+                            <a href="#">我的订单</a>
+                            <a href="#">基本信息</a>
+                            <a href="/logout">注销</a>
+                        </div>
+                    </div>
+                </li>                {{else}}
+                <li><a href="/views/pages/user/login.html">登录</a></li>
+                {{end}}
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <section class="filters">
+        <h2>影院筛选</h2>
+
+
+        <!-- 品牌筛选 -->
+        <div class="filter-section" id="brand-filter">
+            <h2>品牌</h2>
+            <div class="filter-options">
+                <a href="#brand1" class="filter-option">全部</a>
+                <a href="#" class="filter-option">长安国际影城</a>
+                <a href="#brand2" class="filter-option">奥斯卡国际影城</a>
+                <a href="#brand3" class="filter-option">幸福蓝海国际影城</a>
+
+            </div>
+        </div>
+
+        <!-- 行政区筛选 -->
+        <div class="filter-section" id="district-filter">
+            <h2>行政区</h2>
+            <div class="filter-options">
+                <a href="#district1" class="filter-option">全部</a>
+                <a href="#district1" class="filter-option">长安区</a>
+                <a href="#district2" class="filter-option">雁塔区</a>
+                <a href="#district2" class="filter-option">新城区</a>
+                <a href="#district2" class="filter-option">临潼区</a>
+
+            </div>
+        </div>
+
+        <!-- 类型筛选 -->
+        <div class="filter-section" id="type-filter">
+            <h2>类型</h2>
+            <div class="filter-options">
+                <a href="#type1" class="filter-option">全部</a>
+                <a href="#type2" class="filter-option">IMAX厅</a>
+                <a href="#type3" class="filter-option">4K厅</a>
+                <a href="#type3" class="filter-option">ALPD Pro高亮厅</a>
+                <a href="#type3" class="filter-option">4DX厅</a>
+
+            </div>
+        </div>
+
+        <!-- 服务筛选 -->
+        <div class="filter-section" id="service-filter">
+            <h2>服务</h2>
+            <div class="filter-options">
+                <a href="#service1" class="filter-option">全部</a>
+                <a href="#service2" class="filter-option">可退票</a>
+                <a href="#service3" class="filter-option">可改签</a>
+                <a href="#service3" class="filter-option">折扣</a>
+            </div>
+        </div>
+    </section>
+    <section class="cinema-list">
+        <h2>筛选结果</h2>
+        {{range .Cinemas}}
+        <a href="/cinema?cinema_id={{.Id}}">
+            <div class="cinema-item">
+                <div class="cinema-info">
+                    <h3>{{.Brand}}({{.Name}})</h3>
+                    <p>地址: {{.Address}}</p>
+                    <p>类型: {{.Types}}</p>
+                </div>
+
+                <div class="cinema-actions">
+                    <p>票价: <span class="ticket-price">¥100</span></p>
+                    <button class="buy-ticket">购票</button>
+                </div>
+            </div>
+        </a>
+        {{end}}
+
+        <!-- 更多影院项 -->
+    </section>
+</main>
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // 处理筛选选项的选择
+    document.querySelectorAll('.filter-section').forEach(section => {
+        const options = section.querySelectorAll('.filter-option');
+
+        options.forEach(option => {
+            option.addEventListener('click', function(event) {
+                event.preventDefault(); // 防止跳转
+
+                // 移除当前类别下所有选项的选中状态
+                options.forEach(opt => opt.classList.remove('active'));
+
+                // 移除已选择选项
+
+                // 添加新选择的选项
+                this.classList.add('active');
+                const selectedOption = document.createElement('span');
+                selectedOption.textContent = this.textContent;
+                selectedOption.className = 'selected-item';
+                selectedOption.setAttribute('data-value', this.textContent)
+
+            });
+        });
+    });
+</script>
+</body>
+</html>

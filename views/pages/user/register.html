@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="/views/static/css/register.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <script type="text/javascript" src="/views/static/script/jquery-1.7.2.js"></script>
+    <script>
+        $(function (){
+            //切换span标签内容
+            if("{{.}}"==="用户名已存在！"){
+                //设置span标签中的文本值
+                $("#msg").text("用户名已存在！");
+            }
+        })
+    </script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/GetMovieByLimit">电影</a></li>
+                <li><a href="/GetCinemaByLimit">影院</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+                <li><a href="/views/pages/user/login.html">登录</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <header>
+        <img src="your-logo.png" alt="Logo" class="logo">
+    </header>
+    <form class="register-form" id="registerForm" action="/register"  method="POST">
+        <h2>注册</h2>
+        <div class="form-group">
+            <label for="username">用户名&emsp;&emsp;<span style="color: #ff2929"></span></label>
+            <input type="text" id="username" name="username" required pattern="[a-zA-Z0-9]{3,}" title="用户名必须是至少3个字符的字母和数字组合">
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password" required pattern=".{6,}" title="密码长度至少为6个字符">
+        </div>
+        <div class="form-group">
+            <label for="email">邮箱</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <input type="submit" value="注册" class="submit1"/>
+    </form>
+    <div class="login">
+        <span>已有账号？</span>
+        <button onclick="location.href='login.html'">登录</button>
+    </div>
+</div>
+
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

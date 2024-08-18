@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>AddMovie</title>
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <link rel="stylesheet" href="/views/static/css/information.css">
+    <script src="/views/static/script/jquery-1.7.2.js"></script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/ManageGetMovieByLimit">电影管理</a></li>
+                <li><a href="/ManageGetCinemaByLimit">影院管理</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">活动</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+<form action="/AddMovie">
+    <main>
+        <div class="header">
+            <div class="header-content">
+                <h1 class="header-title">图片</h1>
+            </div>
+        </div>
+        <div class="movie-container">
+            <div class="movie-header">
+                <!--            <img src="{{.ImgPath}}" alt="{{.Id}}" class="movie-poster">-->
+                <input type="text" placeholder="图片地址" name="imgpath">
+                <div class="movie-info">
+                    <input class="movie-title" placeholder="电影名" name="Name" type="text"/>
+                    <input class="movie-subtitle0" placeholder="电影别名" name="NickName" type="text"><br><br>
+                    <input class="movie-subtitle" placeholder="电影类型" name="Types" type="text"><br>
+                    <input class="movie-subtitle" placeholder="电影出版地区" name="Area" type="text">/
+                    <input class="movie-subtitle" placeholder="时长（单位：分钟）" name="Times" type="text" id="Times">分钟<br>
+                    <input class="movie-subtitle" placeholder="时间(格式：2024-8-1 9：00)" name="Year" type="text" id="Year">/中国大陆上映<br>
+                    <label>类别： <input type="radio" value="now" name="status" checked> 正在热映
+                        <input type="radio" value="upcoming" name="status"> 即将上映电影 </label>
+                    <br>
+                    评分：<input class="movie-subtitle" placeholder="格式：9.9" name="Score" type="text">
+                    <br><br>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-item">
+                    <h2 class="content-title" id="Introduce">剧情介绍</h2>
+                    <label>
+                        <textarea cols="100" rows="8" name="Introduce" placeholder="请简单地描述下电影！"></textarea>
+                    </label>
+                </div>
+                <div class="content-item">
+                    <h2 class="content-title" id="Starring">主演</h2>
+                    <label>
+                        <textarea cols="50" rows="3" name="Starring" placeholder="主演"></textarea>
+                    </label>
+                </div>
+                <div class="content-item">
+                    <h2 class="content-title">获奖情况</h2>
+                    奖项：
+                    <input class="content-text" placeholder="获得的奖项" name="Award" type="text"><br>
+                    获奖次数：
+                    <input class="content-text" placeholder="0" name="AwardTimes" type="text" id="AwardTimes">
+                </div>
+                <div class="content-item">
+                    <h2 class="content-title">票房</h2>
+                    票房总额：
+                    <input class="content-text" placeholder="票房（单位元）" name="Grossed" type="text">元
+                </div>
+                <div class="content-item">
+                    <h2 class="content-title">基本电影信息</h2>
+                    <p class="content-text">
+                        类型：此处不用填写，已在上方填写过。<br>
+                        上映日期：此处不用填写，已在上方填写过。<br>
+                        片长：此处不用填写，已在上方填写过。
+                    </p>
+                </div>
+            </div>
+            <div class="btn-container">
+                <input type="submit" class="btn btn-submit" value="添加" id="submit">
+            </div>
+        </div>
+    </main>
+</form>
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+<script>
+    //规定时间格式的正则表达式
+    //冒号为中文
+    const regex = /^\d{4}-\d{1,2}-\d{1,2} \d{1,2}：\d{2}$/
+    //判断是否是数字的正则表达式
+    const num = /^\d+$/
+    $(function(){
+        //给提交按钮绑定单击事件
+        $("#submit").click(function(){
+            //
+            /*
+                val()：用来获取或设置input中的value属性值
+                对象.val()：获取value属性值
+                对象.val("new Value")：设置value属性值
+            */
+            var year = $("#Year").val();
+            //判断年份是否符合规则
+            if (!regex.test(year)){
+                alert("时间格式错误")
+                //不符合则取消默认行为
+                return regex.test(year)
+            }
+            var time = $("#Times").val();
+            //判断年份是否符合规则
+            if (!num.test(time)){
+                alert("电影时长格式错误！请确保输入的只有数字")
+                return num.test(time)
+            }
+
+            var awardtimes = $("#AwardTimes").val();
+            //判断年份是否符合规则
+            if (!num.test(awardtimes)){
+                alert("获奖次数格式错误！请确保输入的只有数字")
+                return num.test(awardtimes)
+            }
+
+
+        });
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购票页面</title>
+    <link rel="stylesheet" href="/views/static/css/cinema.css">
+    <link rel="stylesheet" href="/views/static/css/styles.css">
+    <link rel="stylesheet" href="/views/static/css/buy2.css">
+    <script src="/views/static/script/jquery-1.7.2.js"></script>
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <!--    <div><img  id="name" src="#" alt="你的名字" width="100%"> </div>-->
+
+    <div class="header-container">
+        <div class="logo">
+            <img src="logo.png" alt="网站标志">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/GetMovieByLimit">电影</a></li>
+                <li><a href="/GetCinemaByLimit">影院</a></li>
+                <li>
+                    <div class="dropdown">
+                        <span>我的</span>
+                        <div class="dropdown-content">
+                            <a href="/GetGoods">我的订单</a>
+                            <a href="/logout" class="logout" onclick="alert1(this)">注销</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="cinema-info">
+        <h1>电影票购买</h1>
+        <div class="cinema">
+            <h2>选择座位</h2>
+            <div class="screen">屏幕</div>
+            <div class="seating-chart">
+                <!--                遍历座位-->
+                {{range $i, $row := . }}
+
+                <div class="row">
+                    {{range $j, $value := $row }}
+                        {{if .}}
+
+                    <div class="seat ban" data-seat="{{ $i }}-{{ $j }}" onclick="choose(this)">{{ $i }}-{{ $j }}</div>
+                        {{else}}
+                    <div class="seat available" data-seat="{{ $i }}-{{ $j }}" onclick="choose(this)">{{ $i }}-{{ $j }}</div>
+
+                        {{end}}
+                    {{end}}
+                </div>
+                {{end}}
+
+                <div class="summary">
+                    <button id="purchase-button" onclick="buy()">购买</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // "seat available"  可选
+    //"seat ban"  不可选
+    //"seat selected"  已选
+    var num = 0
+    var arr = []
+
+    function choose(a){
+        // 获取class属性，并判断
+        var Class = a.getAttribute('class');
+        //获取座位编号
+        var data = a.getAttribute('data-seat');
+        // alert(data)
+        // alert(Class)
+        if (Class === "seat available"){
+            a.setAttribute('class','seat selected')
+            arr.push(data)
+            num++
+        }
+        if (Class === "seat selected"){
+            a.setAttribute('class','seat available')
+            arr = arr.filter(function (item){
+                return item !== data
+            })
+            num--
+        }
+    }
+
+
+    function buy(){
+        if (num>0){
+            confirm("确定要购买这"+num+"张票吗？😋\n\n"+"座位为："+arr)
+            var url = new URL(window.location.href);
+
+            // 使用 URLSearchParams 获取查询字符串
+            var params = new URLSearchParams(url.search);
+
+            //获取到这个场次的id
+            var id = params.get('playbackId')
+
+
+
+            //alert(url2)
+            // 触发点击事件，直接去新连接
+            //加锁判断该位置是否有票
+           window.location.href = '/Check?Id='+id+'&seat='+arr+'&num='+num;
+        }else{
+            alert("您没有选择任何票！")
+        }
+        // 买票跳转前判断是否有票
+
+    }
+
+</script>
+<!-- 底部区域 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/views/static/img/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="/views/static/img/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/views/static/img/instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+

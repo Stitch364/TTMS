@@ -1,0 +1,37 @@
+
+/* 每个筛选部分的样式 */
+.filter-section {
+    margin-bottom: 8px;
+}
+
+/* 筛选标题的样式 */
+.filter-section h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* 筛选选项的样式 */
+.filter-option {
+    font-size: 18px;
+    display: inline-block;
+    padding: 4px 4px;
+    text-decoration: none;
+    color: rgba(52, 47, 47, 0.89); /* 链接颜色 */
+    border-radius: 4px;
+    margin: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* 鼠标悬停时的样式 */
+.filter-option:hover {
+    background-color: #e9ecef;
+    color: #0056b3; /* 悬停时文字颜色 */
+}
+
+/* 选中的筛选项的样式 */
+.filter-option.active {
+    background-color: #007bff;
+    color: #fff; /* 选中时文字颜色 */
+}
+
